@@ -3,59 +3,63 @@
 //need buttons so person can select answer
 //need answers right and wrong
 //need reset function
+window.onload = function(){
+  alert("You will have 300 seconds(5 minutes), to complete 12 trivia questions that are based around the 1960's in the US. Press the start button to begin. After choosing your answer, please press next to go on to the next question. If at anytime you wish to start over or play again, press the start over button." )
+}
 
 $('#start').on('click', function (g) {
-
+var t = 0;
+$("#start").hide();
 
 (function(g) {
 	var questions = [{
     question: "Who was the president of the US during the Cuban Missle Crisis?",
     choices: ["Ronald Reagan", "John F. Kennedy", "George Washnigton", "L.B. Johnson"],
     correctAnswer: 1
-}, {
-	question: "Who won the most Stanley Cups in the 1960's?",
-	choices: ["Montreal Candians","Toronto Maple Leafs","Chicago Blackhawks","New York Rangers"],
-	correctAnswer: 0
-}, {
-	question: "Who was the first man to walk on the moon?",
-	choices: ["Lance Armstrong","Buzz Aldrin","Gus Grissom","Neil Armstrong"],
-	correctAnswer: 3
-}, {
-	question: "What year did Martin Luther King give his famous - I Have A Dream Speech?",
-	choices: ["1967","1965","1963","1969"],
-	correctAnswer: 2
-}, {
-	question: "What infamous group came to America from the UK in 1964?",
-	choices: ["The Beatles","The Rolling Stones","The Who","Bob Dylan"],
-	correctAnswer: 0
-}, {
-	question: "On what date did the Green Bay Packers beat The Kansas City Cheifs in Super Bowl I?",
-	choices:["Febuary 5, 1962","January 15, 1967","March 1, 1968","Febuary 15, 1966"],
-	correctAnswer: 1
-}, {
-	question: "In what year was Mary Poppins released?",
-	choices: ["1962","1969","1965","1964"],
-	correctAnswer: 3
-}, {
-	question:"Who won the World Series in 1969?",
-	choices: ["New York Yankees","New York Mets","St.Louis Cardinals","Detroit Tigers"],
-	correctAnswer: 1
-}, {
-	question:"What famous cartoon appeared on CBS for the first time in 1969?",
-	choices: ["Scooby Doo","Tom & Jerry","Looney Tunes","Wacky Races"],
-	correctAnswer: 0
-}, {
-	question:"What did the Supreme Court case of Miranda v. Arizona in 1966 conclude?",
-	choices: ["Segregation is wrong","Right to fair trial","Police must read suspects their rights","None of the above"],
-	correctAnswer: 2
-}, {
-	question:"Who won the Academy Award for best picture in 1965?",
-	choices: ["Darling","My Fair Lady","The Sound of Music","Oliver!"],
-	correctAnswer: 2
-}, {
-	question:"What car did Ford debut at the 1964 World's Fair?",
-	choices: ["Mustang","Fairlane","Falcon","Galaxy"],
-	correctAnswer: 0
+  }, {
+	 question: "Who won the most Stanley Cups in the 1960's?",
+	 choices: ["Montreal Candians","Toronto Maple Leafs","Chicago Blackhawks","New York Rangers"],
+	 correctAnswer: 0
+  }, {
+	 question: "Who was the first man to walk on the moon?",
+	 choices: ["Lance Armstrong","Buzz Aldrin","Gus Grissom","Neil Armstrong"],
+	 correctAnswer: 3
+  }, {
+	 question: "What year did Martin Luther King give his famous - I Have A Dream Speech?",
+	 choices: ["1967","1965","1963","1969"],
+	 correctAnswer: 2
+  }, {
+	 question: "What infamous group came to America from the UK in 1964?",
+	 choices: ["The Beatles","The Rolling Stones","The Who","Bob Dylan"],
+	 correctAnswer: 0
+  }, {
+	 question: "On what date did the Green Bay Packers beat The Kansas City Cheifs in Super Bowl I?",
+	 choices:["Febuary 5, 1962","January 15, 1967","March 1, 1968","Febuary 15, 1966"],
+	 correctAnswer: 1
+  }, {
+	 question: "In what year was Mary Poppins released?",
+	 choices: ["1962","1969","1965","1964"],
+	 correctAnswer: 3
+  }, {
+	 question:"Who won the World Series in 1969?",
+	 choices: ["New York Yankees","New York Mets","St.Louis Cardinals","Detroit Tigers"],
+	 correctAnswer: 1
+  }, {
+	 question:"What famous cartoon appeared on CBS for the first time in 1969?",
+	 choices: ["Scooby Doo","Tom & Jerry","Looney Tunes","Wacky Races"],
+	 correctAnswer: 0
+  }, {
+	 question:"What did the Supreme Court case of Miranda v. Arizona in 1966 conclude?",
+	 choices: ["Segregation is wrong","Right to fair trial","Police must read suspects their rights","None of the above"],
+	 correctAnswer: 2
+  }, {
+	 question:"Who won the Academy Award for best picture in 1965?",
+	 choices: ["Darling","My Fair Lady","The Sound of Music","Oliver!"],
+	 correctAnswer: 2
+  }, {
+	 question:"What car did Ford debut at the 1964 World's Fair?",
+	 choices: ["Mustang","Fairlane","Falcon","Galaxy"],
+	 correctAnswer: 0
 }];
   
   var questionCounter = 0; 
@@ -78,7 +82,8 @@ $('#start').on('click', function (g) {
     
     if (isNaN(selections[questionCounter])) {
       alert('Please make a selection!');
-    } else {
+    } 
+    else {
       questionCounter++;
       displayNext();
     }
@@ -93,7 +98,7 @@ $('#start').on('click', function (g) {
     }
     questionCounter = 0;
     selections = [];
-    gameReset();
+    t=0;
     displayNext();
   });
   
@@ -101,12 +106,13 @@ $('#start').on('click', function (g) {
   $('.button').on('mouseenter', function () {
     $(this).addClass('active');
   });
+
   $('.button').on('mouseleave', function () {
     $(this).removeClass('active');
   });
   
   
-  function createQuestionElement(index) {
+  function createQuestion(index) {
     var qElement = $('<div>', {
       id: 'question'
     });
@@ -149,7 +155,7 @@ $('#start').on('click', function (g) {
       $('#question').remove();
       
       if(questionCounter < questions.length){
-        var nextQuestion = createQuestionElement(questionCounter);
+        var nextQuestion = createQuestion(questionCounter);
         quiz.append(nextQuestion).fadeIn();
         if (!(isNaN(selections[questionCounter]))) {
           $('input[value='+selections[questionCounter]+']').prop('checked', true);
@@ -160,7 +166,8 @@ $('#start').on('click', function (g) {
           
           $('#next').show();
         }
-      }else {
+      }
+      else {
         var scoreElem = displayScore();
         quiz.append(scoreElem).fadeIn();
         $('#next').hide();
@@ -188,36 +195,28 @@ $('#start').on('click', function (g) {
 
 
 
-	var myVar = setInterval(function() { 
+	var timer = setInterval(function() { 
     myTimer() 
     }, 1000);
 
-	var t = 0;
 	   function myTimer() {
-  	 document.getElementById("timer").innerHTML = t++;
-  	 if (t == 300) {
-  	 timesUp();
-  	}
-  	};
+  	     document.getElementById("timer").innerHTML = t++;
 
-  	function timesUp() {
-  		$('#timer').html('<h2>Time\'s Up!</h2>');
-  		alert("Times Up! Game Over!")
-  		gameReset();
-      return;
-   };
+  	     if (t == 300) {
+  	     timesUp();
+  	     }
+  	 };
+
+  	 function timesUp() {
+  		  $('#timer').html('<h2>Time\'s Up!</h2>');
+  		  alert("Times Up! Game Over!")
+  		  gameReset();
+        return;
+      };
 
     function gameReset() {
    	  questionCounter = 0;
       selections = [];
-      
-      var myVar = setInterval(function() { 
-        myTimer() 
-        }, 1000);
-
-      var t = 0;
-        function myTimer() {
-        document.getElementById("timer").innerHTML = t++;
+      t = 0;
       };
-    };
-});
+  });

@@ -9,8 +9,13 @@ body{
 	width: 100%;
     max-width: 780px;
     text-align: center;
-	padding: 200px;
+	padding: 100px;
 	margin: auto;
+	font-family: 'Denk One', sans-serif;
+}
+h1{
+	font-family: 'Denk One', sans-serif;
+	font-size: 40px;
 }
 ul{
 	list-style-type: none;
